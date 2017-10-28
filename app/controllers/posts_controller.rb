@@ -20,6 +20,15 @@ class PostsController < ApplicationController
       end
     end
 
+    def edit
+      @group = Group.find(params[:group_id])
+      
+      if current_user != @group.user
+        redirect_to :new ,alert: "You have no permission"
+      end
+
+    end
+
     private
 
     def post_params
